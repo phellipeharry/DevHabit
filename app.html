@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevHabit - Painel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+</head>
+<body>
+
+    <header class="top-nav-container">
+        <a href="index.html" class="logo" style="text-decoration: none;">
+            <i class="ri-terminal-box-fill"></i> DevHabit
+        </a>
+        <nav class="top-nav">
+            <button class="nav-btn active" data-target="tab-lessons">
+                <i class="ri-code-box-line"></i> Aprender
+            </button>
+            <button class="nav-btn" data-target="tab-calendar">
+                <i class="ri-bar-chart-fill"></i> Progresso
+            </button>
+        </nav>
+        <div class="nav-spacer"></div>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="user-profile">
+            <div class="profile-avatar">
+                <i class="ri-user-smile-line"></i>
+            </div>
+            <div class="profile-info">
+                <div class="profile-header">
+                     <h4>Phellipe Harry</h4>
+                     <div class="streak-mini" title="Sequência de 12 dias!">
+                        <i class="ri-fire-fill"></i> 12
+                     </div>
+                </div>
+                <div class="stats-row">
+                    <span class="level-badge">Lvl. 5</span>
+                    <div class="lives">
+                        <i class="ri-heart-3-fill"></i>
+                        <i class="ri-heart-3-fill"></i>
+                        <i class="ri-heart-3-line heart-recovering" data-tooltip="Recupera em: 14:32 min"></i>
+                    </div>
+                </div>
+                <div class="xp-container">
+                    <div class="xp-bar-bg">
+                        <div class="xp-bar-fill" style="width: 76%;"></div> 
+                    </div>
+                    <span class="xp-text">456/600 XP para Lvl. 6</span>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="sidebar-divider">
+        
+        <div class="sidebar-course-wrapper">
+            <h5 class="menu-title">Curso Atual</h5>
+            
+            <div class="course-active-card" onclick="toggleSidebarCourseMenu()">
+                <div class="course-icon-box" id="active-course-icon-box">
+                    <i class="ri-html5-fill" style="color: #e34f26;"></i>
+                </div>
+                <div class="course-info-box">
+                    <span class="course-label">Trilha Fullstack</span>
+                    <h4 id="active-course-name">HTML & CSS</h4>
+                </div>
+                <i class="ri-arrow-down-s-line chevron-sidebar"></i>
+            </div>
+
+            <div class="sidebar-dropdown hidden" id="sidebar-course-dropdown">
+                <div class="sidebar-item" onclick="selectCourse('html')">
+                    <i class="ri-html5-fill" style="color: #e34f26;"></i> 
+                    <span>HTML & CSS</span>
+                </div>
+                <div class="sidebar-item" onclick="selectCourse('js')">
+                    <i class="ri-javascript-fill" style="color: #f7df1e;"></i> 
+                    <span>JavaScript</span>
+                </div>
+                <div class="sidebar-item" onclick="selectCourse('react')">
+                    <i class="ri-reactjs-fill" style="color: #61dafb;"></i> 
+                    <span>React</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="app-container">
+        
+        <section id="tab-lessons" class="tab-content active">
+            <header class="lessons-header">
+                <div class="header-top-row">
+                    <span>Trilha Fullstack</span>
+                </div>
+                <h2 id="module-title">Desenvolvedor Web Iniciante</h2>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 15%;"></div>
+                </div>
+                <p class="progress-text">15% Concluído</p>
+            </header>
+            
+            <div class="scrollable-content" id="lessons-container">
+                 <div class="module-section">
+                    <h3>1. Introdução à Web</h3>
+                    <div class="lesson-card completed">
+                        <div class="card-status-line"></div>
+                        <div class="lesson-details">
+                            <h4>01. Como a internet funciona</h4>
+                            <span class="lesson-type"><i class="ri-book-open-line"></i> Teoria</span>
+                        </div>
+                        <i class="ri-checkbox-circle-fill status-icon"></i>
+                    </div>
+                    <div class="lesson-card active">
+                        <div class="card-status-line"></div>
+                        <div class="lesson-details">
+                            <h4>02. Sua primeira tag HTML</h4>
+                            <span class="lesson-type"><i class="ri-code-s-slash-line"></i> Prática</span>
+                        </div>
+                        <button class="start-btn">Bora!</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-calendar" class="tab-content hidden">
+            <div class="scrollable-content progress-content">
+                <h2 class="section-main-title">Evolução</h2>
+                
+                <div class="chart-container" style="position: relative; height: 300px; width: 100%;">
+                    <canvas id="progressChart"></canvas>
+                </div>
+
+                <div class="tracker-container">
+                    <div class="tracker-header">
+                        <h3 class="tracker-title">Tracker de Hábitos</h3>
+                        <div class="date-filters">
+                            <div class="custom-select">
+                                <i class="ri-calendar-line"></i>
+                                <select id="year-select"></select>
+                            </div>
+                            <div class="custom-select">
+                                <i class="ri-calendar-event-line"></i>
+                                <select id="month-select"></select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="habits-grid-wrapper" id="habits-grid-interactive">
+                        <div class="grid-header" id="grid-header-days"></div>
+                        
+                        <div class="habit-row">
+                            <div class="habit-label"><i class="ri-code-box-line"></i> Aulas Concluídas</div>
+                            <div class="dots-container" id="dots-row-aulas"></div>
+                        </div>
+                        <div class="habit-row">
+                            <div class="habit-label"><i class="ri-keyboard-box-line"></i> Exercícios Práticos</div>
+                            <div class="dots-container" id="dots-row-exercicios"></div>
+                        </div>
+                         <div class="habit-row">
+                            <div class="habit-label"><i class="ri-book-read-line"></i> Leitura Extra</div>
+                            <div class="dots-container" id="dots-row-leitura"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="jss/script.js"></script>
+</body>
+</html>

@@ -3,155 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
-    <title>DevHabit</title>
+    <title>DevHabit - Aprenda a Programar</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 </head>
 <body>
 
-    <header class="top-nav-container">
-        <div class="logo">
-            <i class="ri-terminal-box-fill"></i> DevHabit
-        </div>
-        <nav class="top-nav">
-            <button class="nav-btn active" data-target="tab-lessons">
-                <i class="ri-code-box-line"></i> Aprender
-            </button>
-            <button class="nav-btn" data-target="tab-calendar">
-                <i class="ri-bar-chart-fill"></i> Progresso
-            </button>
-        </nav>
-        <div class="nav-spacer"></div> </header>
+    <section class="landing-container">
+        <div class="purple-glow-bg"></div>
 
-    <aside class="sidebar" id="sidebar">
-        <div class="user-profile">
-            <div class="profile-avatar">
-                <i class="ri-user-smile-line"></i>
-            </div>
-            
-            <div class="profile-info">
-                <div class="profile-header">
-                     <h4>Phellipe Harry</h4>
-                     <div class="streak-mini" title="Sequência de 12 dias!">
-                        <i class="ri-fire-fill"></i> 12
-                     </div>
-                </div>
-
-                <div class="stats-row">
-                    <span class="level-badge">Lvl. 5</span>
-                    <div class="lives">
-                        <i class="ri-heart-3-fill"></i>
-                        <i class="ri-heart-3-fill"></i>
-                        <i class="ri-heart-3-line heart-recovering" data-tooltip="Recupera em: 14:32 min"></i>
-                    </div>
-                </div>
-
-                <div class="xp-container">
-                    <div class="xp-bar-bg">
-                        <div class="xp-bar-fill" style="width: 76%;"></div> 
-                    </div>
-                    <span class="xp-text">456/600 XP para Lvl. 6</span>
-                </div>
-            </div>
-        </div>
-
-        <hr class="sidebar-divider">
-        <div class="course-selection">
-            <h5 class="menu-title">Trilhas de Estudo</h5>
-            <button class="course-btn active" onclick="changeCourse(this)">
-                <i class="ri-html5-fill" style="color: #e34f26;"></i> <span class="course-name">HTML & CSS</span>
-            </button>
-            <button class="course-btn" onclick="changeCourse(this)">
-                <i class="ri-javascript-fill" style="color: #f7df1e;"></i> <span class="course-name">JavaScript</span>
-            </button>
-            <button class="course-btn" onclick="changeCourse(this)">
-                <i class="ri-reactjs-fill" style="color: #61dafb;"></i> <span class="course-name">React</span>
-            </button>
-        </div>
-    </aside>
-
-    <main class="app-container">
-
-        <section id="tab-lessons" class="tab-content active">
-            <header class="lessons-header">
-                <span>Trilha Fullstack</span>
-                <h2>Desenvolvedor Web Iniciante</h2>
-                <div class="progress-container">
-                    <div class="progress-bar" style="width: 15%;"></div>
-                </div>
-                <p class="progress-text">15% Concluído</p>
+        <div class="landing-content">
+            <header class="landing-header">
+                <i class="ri-terminal-box-fill logo-icon-lg"></i>
+                <h1 class="app-title">DevHabit</h1>
+                <p class="tagline">O seu hábito diário de código.</p>
             </header>
-            <div class="scrollable-content">
-                <div class="module-section">
-                    <h3>1. Introdução à Web</h3>
-                    <div class="lesson-card completed">
-                        <div class="card-status-line"></div>
-                        <div class="lesson-details">
-                            <h4>01. Como a internet funciona</h4>
-                            <span class="lesson-type"><i class="ri-book-open-line"></i> Teoria</span>
-                        </div>
-                        <i class="ri-checkbox-circle-fill status-icon"></i>
-                    </div>
-                    <div class="lesson-card active">
-                        <div class="card-status-line"></div>
-                        <div class="lesson-details">
-                            <h4>02. Sua primeira tag HTML</h4>
-                            <span class="lesson-type"><i class="ri-code-s-slash-line"></i> Prática</span>
-                        </div>
-                        <button class="start-btn">Bora!</button>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="tab-calendar" class="tab-content hidden">
-            <div class="scrollable-content progress-content">
-                
-                <h2 class="section-main-title">Evolução do Mês</h2>
-                
-                <div class="chart-container">
-                    <canvas id="progressChart"></canvas>
-                </div>
+            <main class="landing-main-info">
+                <h2>Aprenda a programar <br><span class="highlight-purple">na prática</span>, sem enrolação.</h2>
+                <p class="description">
+                    Domine as tecnologias mais usadas no mercado com lições interativas, projetos reais e um sistema gamificado que te mantém focado na sua evolução.
+                </p>
 
-                <div class="tracker-container">
-                    <div class="tracker-header">
-                        <h3 class="tracker-title">Tracker Mensal</h3>
-                        <div class="filter-container">
-                            <i class="ri-calendar-event-line"></i>
-                            <select id="month-filter" class="month-select">
-                                <option value="jan-26">Janeiro 2026</option>
-                                <option value="fev-26" selected>Fevereiro 2026</option>
-                                <option value="mar-26">Março 2026</option>
-                                <option value="abr-26">Abril 2026</option>
-                            </select>
-                             <i class="ri-arrow-down-s-line chevron-icon"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="habits-grid-wrapper" id="habits-grid-interactive">
-                        <div class="grid-header" id="grid-header-days"></div>
-
-                        <div class="habit-row">
-                            <div class="habit-label"><i class="ri-code-box-line"></i> Aulas Concluídas</div>
-                            <div class="dots-container" id="dots-row-1" data-habit-id="aulas"></div>
-                        </div>
-                        <div class="habit-row">
-                            <div class="habit-label"><i class="ri-keyboard-box-line"></i> Exercícios Práticos</div>
-                            <div class="dots-container" id="dots-row-2" data-habit-id="exercicios"></div>
-                        </div>
-                         <div class="habit-row">
-                            <div class="habit-label"><i class="ri-book-read-line"></i> Leitura Extra</div>
-                            <div class="dots-container" id="dots-row-3" data-habit-id="leitura"></div>
+                <div class="tech-stack-preview">
+                    <p class="stack-label">O que você vai dominar:</p>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <i class="devicon-python-plain colored"></i>
+                            <i class="devicon-java-plain colored"></i>
+                            <i class="devicon-javascript-plain colored"></i>
+                            <i class="devicon-html5-plain colored"></i>
+                            <i class="devicon-css3-plain colored"></i>
+                            <i class="devicon-postgresql-plain colored"></i>
+                            <i class="devicon-mongodb-plain colored"></i>
+                            <i class="devicon-docker-plain colored"></i>
+                            <i class="devicon-react-original colored"></i>
+                            <i class="devicon-python-plain colored"></i>
+                            <i class="devicon-java-plain colored"></i>
+                            <i class="devicon-javascript-plain colored"></i>
+                            <i class="devicon-html5-plain colored"></i>
+                            <i class="devicon-css3-plain colored"></i>
+                            <i class="devicon-postgresql-plain colored"></i>
+                            <i class="devicon-mongodb-plain colored"></i>
+                            <i class="devicon-docker-plain colored"></i>
+                            <i class="devicon-react-original colored"></i>
                         </div>
                     </div>
                 </div>
+            </main>
 
-            </div>
-        </section>
-    </main>
+            <footer class="landing-footer">
+                <a href="app.html" class="cta-button-pulse" style="text-decoration: none;">
+                    Começar a Codar <i class="ri-arrow-right-s-line"></i>
+                </a>
+                <p class="login-link">Já tem uma conta? <a href="#">Fazer Login</a></p>
+            </footer>
+        </div>
+    </section>
 
-    <script src="jss/script.js"></script>
-</body>
+    </body>
 </html>
