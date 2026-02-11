@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevApp - Protótipo</title>
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <title>DevHabit</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -26,17 +27,36 @@
 
     <aside class="sidebar" id="sidebar">
         <div class="user-profile">
-            <div class="profile-avatar"><i class="ri-user-smile-line"></i></div>
+            <div class="profile-avatar">
+                <i class="ri-user-smile-line"></i>
+            </div>
+            
             <div class="profile-info">
-                <h4>Phellipe Harry</h4>
+                <div class="profile-header">
+                     <h4>Phellipe Harry</h4>
+                     <div class="streak-mini" title="Sequência de 12 dias!">
+                        <i class="ri-fire-fill"></i> 12
+                     </div>
+                </div>
+
                 <div class="stats-row">
                     <span class="level-badge">Lvl. 5</span>
                     <div class="lives">
-                        <i class="ri-heart-3-fill"></i><i class="ri-heart-3-fill"></i><i class="ri-heart-3-fill"></i>
+                        <i class="ri-heart-3-fill"></i>
+                        <i class="ri-heart-3-fill"></i>
+                        <i class="ri-heart-3-line heart-recovering" data-tooltip="Recupera em: 14:32 min"></i>
                     </div>
+                </div>
+
+                <div class="xp-container">
+                    <div class="xp-bar-bg">
+                        <div class="xp-bar-fill" style="width: 76%;"></div> 
+                    </div>
+                    <span class="xp-text">456/600 XP para Lvl. 6</span>
                 </div>
             </div>
         </div>
+
         <hr class="sidebar-divider">
         <div class="course-selection">
             <h5 class="menu-title">Trilhas de Estudo</h5>

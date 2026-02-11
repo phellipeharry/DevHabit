@@ -1,11 +1,12 @@
 :root {
-    --bg-app: #0f1015;       /* Fundo super escuro estilo PeakHabit */
+    --bg-app: #0f1015;      
     --bg-card: #181920;      
     --bg-card-hover: #23252e;
     
     --color-purple: #8257e5; /* Roxo para as aulas */
     --color-green: #4ade80;  /* Verde neon para progresso */
     --color-green-glow: rgba(74, 222, 128, 0.4);
+    --color-red: #e53935;
     
     --text-primary: #e1e1e6;
     --text-secondary: #a8a8b3;
@@ -92,7 +93,7 @@ body[data-active-tab="lessons"] .nav-btn.active {
 }
 .scrollable-content { padding: 40px; max-width: 1000px; margin: 0 auto; }
 
-/* Sidebar (Mesmo de antes, mas sem o calc da bottom-nav) */
+/* Sidebar */
 .sidebar {
     position: fixed; top: 0; left: 0; height: 100vh; width: 75px;
     background-color: var(--bg-card); border-right: 1px solid #323238;
@@ -100,10 +101,133 @@ body[data-active-tab="lessons"] .nav-btn.active {
     display: flex; flex-direction: column; white-space: nowrap;
 }
 .sidebar:hover { width: 280px; box-shadow: 5px 0 15px rgba(0,0,0,0.5); }
-.user-profile { display: flex; align-items: center; gap: 15px; padding: 10px; margin: 15px 10px; border: 2px solid var(--color-purple); border-radius: var(--border-radius); background: rgba(130, 87, 229, 0.05); }
-.profile-avatar { min-width: 45px; height: 45px; background: var(--color-purple); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; color: white; }
-.profile-info { opacity: 0; transition: 0.2s; display: flex; flex-direction: column; }
+
+/* --- Perfil Gamificado (Atualizado) --- */
+/* --- Perfil Gamificado (Atualizado) --- */
+.user-profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 12px;
+    margin: 15px 10px;
+    border: 2px solid var(--color-purple);
+    border-radius: var(--border-radius);
+    background: rgba(130, 87, 229, 0.05);
+    overflow: hidden; 
+    transition: all 0.3s ease;
+}
+
+/* Centraliza o avatar perfeitamente quando a barra fecha */
+.sidebar:not(:hover) .user-profile {
+    padding: 12px 0; /* Remove o padding lateral */
+    justify-content: center; /* Centraliza automaticamente o conteúdo que sobrar */
+}
+
+.profile-avatar {
+    min-width: 45px; height: 45px;
+    background: var(--color-purple);
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 1.5rem; color: white;
+    flex-shrink: 0;
+}
+
+.profile-info {
+    display: flex; flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.2s;
+    flex: 1;
+    white-space: nowrap;
+}
 .sidebar:hover .profile-info { opacity: 1; transition-delay: 0.1s; }
+
+/* Cabeçalho com Nome e Streak */
+.profile-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 4px; width: 100%;
+}
+.profile-header h4 { font-size: 1.1rem; margin: 0; }
+
+.streak-mini {
+    display: flex; align-items: center; gap: 4px;
+    color: #ff9f43; font-weight: bold; font-size: 0.9rem;
+}
+.streak-mini i { font-size: 1.2rem; }
+
+/* Linha de Stats (Nível e Vidas) */
+.stats-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.level-badge { font-size: 0.85rem; color: var(--color-purple); font-weight: bold; background: rgba(130, 87, 229, 0.2); padding: 2px 6px; border-radius: 4px; }
+.lives { display: flex; gap: 2px; color: var(--color-red); font-size: 1rem; }
+
+/* --- Tooltip do Coração (O balãozinho de tempo) --- */
+.heart-recovering {
+    position: relative;
+    cursor: help;
+}
+
+/* Coração Cinza (Vida Perdida) */
+i.heart-recovering {
+    color: var(--text-disabled) !important; /* Força o cinza por cima do vermelho */
+    opacity: 0.6;
+}
+
+/* O balão com o texto */
+.heart-recovering::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 140%; left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: #23252e; color: var(--text-primary);
+    padding: 6px 10px; border-radius: 6px;
+    font-size: 0.75rem; white-space: nowrap;
+    border: 1px solid #323238;
+    opacity: 0; visibility: hidden;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none; z-index: 10;
+}
+
+/* A setinha pequena embaixo do balão */
+.heart-recovering::after {
+    content: ''; position: absolute;
+    bottom: 100%; left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    border-width: 6px; border-style: solid;
+    border-color: #23252e transparent transparent transparent;
+    opacity: 0; visibility: hidden;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mostra o tooltip ao passar o mouse */
+.heart-recovering:hover::before,
+.heart-recovering:hover::after {
+    opacity: 1; visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* --- Nova Barra de XP --- */
+.xp-container { width: 100%; }
+.xp-bar-bg {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1); /* Fundo cinza claro */
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+.xp-bar-fill {
+    height: 100%;
+    /* Degradê roxo para dar um efeito mais bonito */
+    background: linear-gradient(90deg, var(--color-purple), #a27bf7);
+    border-radius: 3px;
+    transition: width 0.5s ease; /* Animação suave se a largura mudar */
+}
+.xp-text {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    display: block;
+    text-align: right; /* Texto alinhado à direita */
+}
+
+/* Continuação da Sidebar */
 .sidebar-divider { border: 0; height: 1px; background: #323238; margin: 10px 0; }
 .course-selection { display: flex; flex-direction: column; padding: 0 10px; gap: 5px; }
 .menu-title { color: var(--text-secondary); opacity: 0; transition: 0.2s; margin-left: 15px;}
@@ -132,7 +256,7 @@ body[data-active-tab="lessons"] .nav-btn.active {
 
 
 /* ==============================
-   ABA 2: PROGRESSO (PeakHabit Refinado)
+   ABA 2: PROGRESSO
 ============================== */
 .section-main-title { color: #fff; margin-bottom: 20px; font-size: 1.5rem; }
 
