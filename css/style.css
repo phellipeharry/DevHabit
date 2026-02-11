@@ -1,0 +1,240 @@
+:root {
+    --bg-app: #0f1015;       /* Fundo super escuro estilo PeakHabit */
+    --bg-card: #181920;      
+    --bg-card-hover: #23252e;
+    
+    --color-purple: #8257e5; /* Roxo para as aulas */
+    --color-green: #4ade80;  /* Verde neon para progresso */
+    --color-green-glow: rgba(74, 222, 128, 0.4);
+    
+    --text-primary: #e1e1e6;
+    --text-secondary: #a8a8b3;
+    --text-disabled: #4d4d57;
+
+    --border-radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hidden { display: none !important; }
+
+/* ==============================
+   NAVEGAÇÃO NO TOPO
+============================== */
+.top-nav-container {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    background-color: var(--bg-app);
+    border-bottom: 1px solid #23252e;
+    margin-left: 75px; /* Compensa a sidebar */
+}
+
+.logo { font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; gap: 10px; color: var(--color-purple); }
+.nav-spacer { width: 150px; }
+
+.top-nav {
+    display: flex;
+    gap: 15px;
+    background: var(--bg-card);
+    padding: 6px;
+    border-radius: 30px;
+    border: 1px solid #23252e;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Efeito Luminoso quando Ativo */
+.nav-btn.active {
+    background: var(--color-green);
+    color: #0f1015;
+    font-weight: bold;
+    box-shadow: 0 0 15px var(--color-green-glow);
+}
+
+/* Se estiver na aba Aulas, o ativo fica roxo */
+body[data-active-tab="lessons"] .nav-btn.active {
+    background: var(--color-purple);
+    box-shadow: 0 0 15px rgba(130, 87, 229, 0.4);
+    color: white;
+}
+
+
+/* ==============================
+   ESTRUTURA PRINCIPAL & SIDEBAR
+============================== */
+.app-container {
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    margin-left: 75px;
+    width: calc(100% - 75px);
+}
+.scrollable-content { padding: 40px; max-width: 1000px; margin: 0 auto; }
+
+/* Sidebar (Mesmo de antes, mas sem o calc da bottom-nav) */
+.sidebar {
+    position: fixed; top: 0; left: 0; height: 100vh; width: 75px;
+    background-color: var(--bg-card); border-right: 1px solid #323238;
+    transition: width 0.3s ease; overflow-x: hidden; z-index: 200;
+    display: flex; flex-direction: column; white-space: nowrap;
+}
+.sidebar:hover { width: 280px; box-shadow: 5px 0 15px rgba(0,0,0,0.5); }
+.user-profile { display: flex; align-items: center; gap: 15px; padding: 10px; margin: 15px 10px; border: 2px solid var(--color-purple); border-radius: var(--border-radius); background: rgba(130, 87, 229, 0.05); }
+.profile-avatar { min-width: 45px; height: 45px; background: var(--color-purple); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; color: white; }
+.profile-info { opacity: 0; transition: 0.2s; display: flex; flex-direction: column; }
+.sidebar:hover .profile-info { opacity: 1; transition-delay: 0.1s; }
+.sidebar-divider { border: 0; height: 1px; background: #323238; margin: 10px 0; }
+.course-selection { display: flex; flex-direction: column; padding: 0 10px; gap: 5px; }
+.menu-title { color: var(--text-secondary); opacity: 0; transition: 0.2s; margin-left: 15px;}
+.sidebar:hover .menu-title { opacity: 1; transition-delay: 0.1s; }
+.course-btn { display: flex; align-items: center; gap: 15px; background: transparent; border: none; color: var(--text-primary); padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; text-align: left; }
+.course-btn:hover { background: var(--bg-card-hover); }
+.course-btn.active { background: rgba(130, 87, 229, 0.15); color: var(--color-purple); font-weight: bold; border-right: 3px solid var(--color-purple); }
+.course-btn i { font-size: 1.6rem; min-width: 25px; text-align: center; }
+.course-name { opacity: 0; transition: 0.2s; }
+.sidebar:hover .course-name { opacity: 1; transition-delay: 0.1s; }
+
+
+/* ==============================
+   ABA 1: AULAS (Resumido)
+============================== */
+.lessons-header { background: linear-gradient(180deg, rgba(130, 87, 229, 0.15) 0%, transparent 100%); padding: 30px; text-align: center; border-radius: 12px; margin-bottom: 20px;}
+.progress-container { background: #23252e; height: 8px; border-radius: 4px; margin: 15px auto; max-width: 400px; overflow: hidden; }
+.progress-bar { background: var(--color-purple); height: 100%; }
+.lesson-card { background: var(--bg-card); padding: 15px 20px; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; position: relative; overflow: hidden; }
+.card-status-line { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #333; }
+.lesson-card.completed .card-status-line { background: var(--color-green); }
+.lesson-card.active { border: 1px solid var(--color-purple); }
+.lesson-card.active .card-status-line { background: var(--color-purple); }
+.lesson-details { flex: 1; margin-left: 15px; }
+.start-btn { background: var(--color-purple); color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: bold;}
+
+
+/* ==============================
+   ABA 2: PROGRESSO (PeakHabit Refinado)
+============================== */
+.section-main-title { color: #fff; margin-bottom: 20px; font-size: 1.5rem; }
+
+/* Gráfico */
+.chart-container {
+    background: var(--bg-card); padding: 20px; border-radius: var(--border-radius);
+    margin-bottom: 30px; height: 300px; border: 1px solid #23252e;
+}
+
+/* Tracker Container */
+.tracker-container {
+    background: var(--bg-card); padding: 30px; border-radius: var(--border-radius);
+    border: 1px solid #23252e;
+}
+
+/* Novo Cabeçalho com Filtro */
+.tracker-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 25px;
+}
+.tracker-title { font-size: 1.2rem; margin: 0; }
+
+.filter-container {
+    position: relative; display: flex; align-items: center;
+    background: #23252e; border-radius: 8px; padding: 0 12px;
+    border: 1px solid transparent; transition: all 0.3s ease;
+}
+.filter-container:hover { border-color: var(--text-disabled); }
+.filter-container i { color: var(--text-secondary); font-size: 1rem;}
+.chevron-icon { position: absolute; right: 10px; pointer-events: none;}
+
+.month-select {
+    appearance: none; /* Remove estilo padrão do navegador */
+    background: transparent; border: none; color: var(--text-primary);
+    padding: 10px 25px 10px 10px; font-size: 0.9rem; cursor: pointer; outline: none;
+    font-family: inherit;
+}
+.month-select option { background-color: var(--bg-card); color: var(--text-primary); }
+
+
+/* Grid e Linhas */
+.habits-grid-wrapper { overflow-x: auto; padding-bottom: 10px; } /* Padding para scrollbar não colar */
+.grid-header, .habit-row { display: flex; align-items: center; margin-bottom: 12px; }
+
+.habit-label {
+    width: 200px; flex-shrink: 0; font-size: 0.95rem; color: var(--text-primary);
+    display: flex; align-items: center; gap: 10px;
+}
+.habit-label i { color: var(--text-secondary); font-size: 1.1rem; }
+
+.dots-container, .grid-header-days {
+    display: grid; grid-template-columns: repeat(22, 1fr); gap: 8px;
+}
+.day-number { text-align: center; font-size: 0.8rem; color: var(--text-secondary); width: 32px; }
+
+
+/* ---- OS NOVOS CHECKBOXES REFINADOS ---- */
+.dot {
+    width: 32px; height: 32px;
+    background-color: #23252e; /* Fundo inativo mais escuro */
+    border-radius: 8px;
+    cursor: pointer; /* Mostra a mãozinha */
+    display: flex; justify-content: center; align-items: center;
+    transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estado Hover (quando passa o mouse no não marcado) */
+.dot:not(.checked):hover {
+    background-color: #2c2e3a;
+    border-color: var(--text-disabled);
+}
+
+/* Estado Marcado (Checked) */
+.dot.checked {
+    /* Degradê sutil para dar profundidade */
+    background: linear-gradient(135deg, var(--color-green), #34d399);
+    box-shadow: 0 0 15px var(--color-green-glow); /* Brilho neon */
+    animation: pulseCheck 0.3s ease-out; /* Animação de clique */
+}
+
+/* Ícone de Check (Usando Remix Icon agora) */
+.dot i {
+    color: #0f1015; /* Ícone escuro para contraste */
+    font-size: 1.2rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0.5) rotate(-20deg); /* Começa pequeno e torto */
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efeito elástico "spring" */
+}
+
+/* Animação do ícone aparecendo */
+.dot.checked i {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+/* Pequena animação de pulso ao clicar */
+@keyframes pulseCheck {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
