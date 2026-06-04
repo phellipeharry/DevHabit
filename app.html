@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevHabit - Painel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+</head>
+<body>
+
+    <header class="top-nav-container">
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <i class="ri-menu-line"></i>
+        </button>
+        <a href="index.html" class="logo" style="text-decoration: none;">
+            <i class="ri-terminal-box-fill"></i> DevHabit
+        </a>
+        <nav class="top-nav">
+            <button class="nav-btn active" data-target="tab-lessons">
+                <i class="ri-code-box-line"></i> Aprender
+            </button>
+            <button class="nav-btn" data-target="tab-profile">
+                <i class="ri-user-3-fill"></i> Perfil
+            </button>
+        </nav>
+        <div class="nav-spacer"></div>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="user-profile">
+            <div class="profile-avatar">
+                <i class="ri-user-smile-line"></i>
+            </div>
+            <div class="profile-info">
+                <div class="profile-header">
+                     <h4>Phellipe Harry</h4>
+                     <div class="streak-mini" title="Sequência de 12 dias!">
+                        <i class="ri-fire-fill"></i> 12
+                     </div>
+                </div>
+                <div class="stats-row">
+                    <span class="level-badge">Lvl. 5</span>
+                    <div class="lives">
+                        <i class="ri-heart-3-fill"></i>
+                        <i class="ri-heart-3-fill"></i>
+                        <i class="ri-heart-3-line heart-recovering" data-tooltip="Recupera em: 14:32 min"></i>
+                    </div>
+                </div>
+                <div class="xp-container">
+                    <div class="xp-bar-bg">
+                        <div class="xp-bar-fill" style="width: 76%;"></div> 
+                    </div>
+                    <span class="xp-text">456/600 XP para Lvl. 6</span>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="sidebar-divider">
+        
+        <div class="sidebar-course-wrapper">
+            <h5 class="menu-title">Trilhas</h5>
+            <div class="sidebar-courses-list" id="sidebar-courses-list">
+                <!-- Clickable tabs will be rendered here dynamically -->
+            </div>
+        </div>
+        
+        <div class="sidebar-footer" style="margin-top: auto; padding: 15px 10px; width: 100%;">
+            <button class="logout-btn" id="logout-btn" style="background: transparent; border: none; color: var(--text-secondary); width: 100%; display: flex; align-items: center; gap: 12px; padding: 12px 15px; cursor: pointer; border-radius: 12px; transition: 0.2s; font-size: 1rem;">
+                <i class="ri-logout-box-line" style="font-size: 1.3rem;"></i>
+                <span class="logout-text">Sair</span>
+            </button>
+        </div>
+    </aside>
+
+    <main class="app-container">
+        
+        <section id="tab-lessons" class="tab-content active">
+            <header class="lessons-header">
+                <div class="header-top-row">
+                    <span>Trilha Fullstack</span>
+                </div>
+                <h2 id="module-title">Desenvolvedor Web Iniciante</h2>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 15%;"></div>
+                </div>
+                <p class="progress-text">15% Concluído</p>
+            </header>
+            
+            <div class="scrollable-content" id="lessons-container">
+                 <div class="module-section">
+                    <h3>1. Introdução à Web</h3>
+                    <div class="lesson-card completed">
+                        <div class="card-status-line"></div>
+                        <div class="lesson-details">
+                            <h4>01. Como a internet funciona</h4>
+                            <span class="lesson-type"><i class="ri-book-open-line"></i> Teoria</span>
+                        </div>
+                        <i class="ri-checkbox-circle-fill status-icon"></i>
+                    </div>
+                    <div class="lesson-card active">
+                        <div class="card-status-line"></div>
+                        <div class="lesson-details">
+                            <h4>02. Sua primeira tag HTML</h4>
+                            <span class="lesson-type"><i class="ri-code-s-slash-line"></i> Prática</span>
+                        </div>
+                        <button class="start-btn">Bora!</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-profile" class="tab-content hidden">
+            <div class="scrollable-content profile-content">
+                <h2 class="section-main-title">Meu Perfil</h2>
+                
+                <!-- Profile Header Card -->
+                <div class="profile-hero-card">
+                    <div class="profile-hero-avatar">
+                        <i class="ri-user-smile-line"></i>
+                    </div>
+                    <div class="profile-hero-details">
+                        <h3 id="profile-full-name">Carregando...</h3>
+                        <p id="profile-email">email@devhabit.com</p>
+                        <div class="profile-hero-stats">
+                            <span class="profile-hero-badge" id="profile-level-badge">Lvl. 1</span>
+                            <span class="profile-hero-badge" id="profile-xp-total">0 XP Total</span>
+                            <span class="profile-hero-badge" id="profile-streak-badge"><i class="ri-fire-fill"></i> 0 Dias</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements Grid Section -->
+                <div class="achievements-section">
+                    <h3 class="achievements-title">Minhas Conquistas</h3>
+                    <div class="achievements-grid" id="achievements-grid-container">
+                        <!-- Will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Exercise Modal Overlay (Duolingo style) -->
+    <div class="exercise-modal-overlay hidden" id="exercise-modal">
+        <div class="exercise-modal-card">
+            <!-- Header: Progress & Lives -->
+            <header class="exercise-header">
+                <button class="close-exercise-btn" id="close-exercise-btn"><i class="ri-close-line"></i></button>
+                <div class="exercise-progress-wrapper">
+                    <div class="exercise-progress-bg">
+                        <div class="exercise-progress-fill" id="exercise-progress-bar" style="width: 0%;"></div>
+                    </div>
+                    <span class="exercise-progress-text" id="exercise-progress-text">Exercício 1 de 3</span>
+                </div>
+                <div class="exercise-lives" id="exercise-lives-count">
+                    <i class="ri-heart-3-fill"></i> 5
+                </div>
+            </header>
+
+            <!-- Main Body: Question content -->
+            <main class="exercise-body" id="exercise-body-content">
+                <!-- Content will be injected dynamically -->
+            </main>
+
+            <!-- Footer: Feedback and Actions -->
+            <footer class="exercise-footer" id="exercise-footer">
+                <button class="check-btn" id="exercise-check-btn" disabled>Avançar</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="src/jss/app.js"></script>
+</body>
+</html>

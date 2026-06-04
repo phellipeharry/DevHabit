@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevHabit - Aprenda a Programar</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+</head>
+<body>
+
+    <section class="landing-container">
+        <div class="purple-glow-bg"></div>
+
+        <div class="landing-content">
+            <header class="landing-header">
+                <i class="ri-terminal-box-fill logo-icon-lg"></i>
+                <h1 class="app-title">DevHabit</h1>
+                <p class="tagline">O seu hábito diário de código.</p>
+            </header>
+
+            <main class="landing-main-info">
+                <h2>Aprenda a programar <br><span class="highlight-purple">na prática</span>, sem enrolação.</h2>
+                <p class="description">
+                    Domine as tecnologias mais usadas no mercado com lições interativas, projetos reais e um sistema gamificado que te mantém focado na sua evolução.
+                </p>
+
+                <div class="tech-stack-preview">
+                    <p class="stack-label">O que você vai dominar:</p>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <i class="devicon-java-plain colored"></i>
+                            <i class="devicon-javascript-plain colored"></i>
+                            <i class="devicon-html5-plain colored"></i>
+                            <i class="devicon-css3-plain colored"></i>
+                            <i class="devicon-postgresql-plain colored"></i>
+                            <i class="devicon-mongodb-plain colored"></i>
+                            <i class="devicon-docker-plain colored"></i>
+                            <i class="devicon-react-original colored"></i>
+                            <i class="devicon-php-plain colored"></i>
+                            <i class="devicon-typescript-plain colored"></i>
+                            <i class="devicon-go-original-wordmark colored"></i>
+                            <i class="devicon-rust-plain colored"></i>
+                            <i class="devicon-swift-plain colored"></i>
+                            <i class="devicon-cplusplus-plain colored"></i>
+                            <i class="devicon-csharp-plain colored"></i>
+
+                            <i class="devicon-python-plain colored"></i>
+                            <i class="devicon-java-plain colored"></i>
+                            <i class="devicon-javascript-plain colored"></i>
+                            <i class="devicon-html5-plain colored"></i>
+                            <i class="devicon-css3-plain colored"></i>
+                            <i class="devicon-postgresql-plain colored"></i>
+                            <i class="devicon-mongodb-plain colored"></i>
+                            <i class="devicon-docker-plain colored"></i>
+                            <i class="devicon-react-original colored"></i>
+                            <i class="devicon-php-plain colored"></i>
+                            <i class="devicon-typescript-plain colored"></i>
+                            <i class="devicon-go-original-wordmark colored"></i>
+                            <i class="devicon-rust-plain colored"></i>
+                            <i class="devicon-swift-plain colored"></i>
+                            <i class="devicon-cplusplus-plain colored"></i>
+                            <i class="devicon-csharp-plain colored"></i>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="landing-footer">
+                <a href="app.html" class="cta-button-pulse" style="text-decoration: none;" id="cta-start-btn">
+                    Começar a Codar <i class="ri-arrow-right-s-line"></i>
+                </a>
+                <p class="login-link">Já tem uma conta? <a href="#" id="open-login-btn">Fazer Login</a></p>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Auth Modal Overlay -->
+    <div class="auth-modal-overlay hidden" id="auth-modal">
+        <div class="auth-modal-card">
+            <button class="close-modal-btn" id="close-auth-btn"><i class="ri-close-line"></i></button>
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tab-login-btn">Entrar</button>
+                <button class="auth-tab-btn" id="tab-register-btn">Criar Conta</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <div class="input-group">
+                    <label for="login-email">E-mail</label>
+                    <input type="email" id="login-email" required placeholder="seu@email.com">
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Senha</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="auth-submit-btn">Entrar <i class="ri-login-box-line"></i></button>
+                <div class="auth-error-msg hidden" id="login-error">Erro ao fazer login</div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form hidden">
+                <div class="input-group">
+                    <label for="register-name">Nome Completo</label>
+                    <input type="text" id="register-name" required placeholder="Seu nome">
+                </div>
+                <div class="input-group">
+                    <label for="register-email">E-mail</label>
+                    <input type="email" id="register-email" required placeholder="seu@email.com">
+                </div>
+                <div class="input-group">
+                    <label for="register-password">Senha</label>
+                    <input type="password" id="register-password" required placeholder="Mínimo 6 caracteres">
+                </div>
+                <button type="submit" class="auth-submit-btn">Criar Conta <i class="ri-user-add-line"></i></button>
+                <div class="auth-error-msg hidden" id="register-error">Erro ao registrar</div>
+            </form>
+        </div>
+    </div>
+     
+    <script src="src/jss/landing.js"></script>
+    </body>
+</html>
